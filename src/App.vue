@@ -1,41 +1,58 @@
 <template>
     <question-page
+        v-if="!showFinalPage"
         :question="getCurrentQuestion"
         @nextQuestion="setNextQuestion"
     />
+    <final-page
+        v-else
+        :answers="answers"
+    />
+
 </template>
 
 <script>
 import QuestionPage from './components/QuestionPage/index.vue'
+import FinalPage from './components/FinalPage/index.vue'
 import questions from './questions.js'
 
 export default {
     name: 'App',
     components: {
-        QuestionPage
+        QuestionPage,
+        FinalPage
     },
     data() {
         return {
             questions: questions,
             answers: [],
             currentQuestionId: 0,
+            showFinalPage: false
         }
     },
     methods: {
         setNextQuestion(answer) {
             console.log('answer: ', answer);
-            this.answers.push({
-                questionId: this.currentQuestionId,
-                answerId: answer?.id
-            });
-            this.currentQuestionId++;
+            this.answers.push(
+                {
+                    questionId: this.currentQuestionId,
+                    answerId: answer?.id ?? null
+                }
+            );
+            
+            const testIsFinished = this.answers.length === this.questions.length;
+            if (testIsFinished) {
+                this.showFinalPage = true;
+            } else {
+                this.currentQuestionId++;
+            }
             console.log('answers: ', this.answers);
-            //... менять вопрос
         },
     },
     computed: {
         getCurrentQuestion() {
-            return this.questions.find(question => question.id === this.currentQuestionId)
+            const currentQuestion = this.questions.find(question => question.id === this.currentQuestionId);
+            return currentQuestion ?? null;
         }
     }
 }

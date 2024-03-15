@@ -9,7 +9,7 @@ const questions = [
                     id: 0,
                 },
                 {
-                    text: 'Какой то ответ 2',
+                    text: 'Какой то ответ 2 (правильный)',
                     id: 1,
                 },
                 {
@@ -45,12 +45,5 @@ const questions = [
             ]
         }
     ];
-
-// const rightAnswers = [
-//     {
-//         questionId: 0,
-//         answerId: 1
-//     }
-// ]
 
 export default questions

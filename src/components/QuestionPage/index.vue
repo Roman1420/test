@@ -9,8 +9,8 @@
                 @click="setAnswer(item)"
             >- {{item.text}}</div>
         </div>
-        <!-- <h2 v-if="currentAnswer">Текущий ответ: {{currentAnswer.text}}</h2>
-        <h2 v-else>Ответ пока не выбран</h2> -->
+        <h2 v-if="currentAnswer">Текущий ответ: {{currentAnswer.text}}</h2>
+        <h2 v-else>Ответ пока не выбран</h2>
         <div
             class="button"
             @click="goToNextQuestion()"
